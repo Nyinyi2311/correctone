@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Profile</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <style>
+    body {
+      background: linear-gradient(-45deg, #0f172a, #1e293b, #3b0764, #111827);
+      background-size: 400% 400%;
+      animation: gradientMove 15s ease infinite;
+    }
+    @keyframes gradientMove {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background: url('https://www.transparenttextures.com/patterns/stardust.png');
+      opacity: 0.05;
+      z-index: 0;
+    }
+
+    .glass {
+      background-color: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    input[type="file"] {
+      display: none;
+    }
+
+    .copy-btn {
+      transition: transform 0.2s ease;
+    }
+
+    .copy-btn:hover {
+      transform: scale(1.1);
+    }
+  </style>
+</head>
+<body class="text-white min-h-screen pb-20 relative z-10">
+
+  <!-- Profile Section -->
+  <section class="max-w-md mx-auto p-6 text-center z-10 relative">
+    <!-- Profile Picture Upload -->
+    <label for="profile-pic" class="block w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden border-4 border-green-400 cursor-pointer">
+      <img id="preview-img" src="https://via.placeholder.com/150" alt="Profile" class="w-full h-full object-cover" />
+      <input type="file" id="profile-pic" accept="image/*" onchange="previewImage(event)">
+    </label>
+
+    <!-- User Info -->
+    <div class="glass p-4 rounded-xl space-y-3">
+      <h2 class="text-xl font-bold">Username123</h2>
+
+      <!-- Profile ID -->
+      <div class="flex justify-center items-center gap-2 text-sm">
+        <span class="text-gray-300">ID:</span>
+        <span id="user-id" class="text-green-400 font-mono">#00000</span>
+        <button onclick="copyText('user-id')" title="Copy ID" class="copy-btn">📎</button>
+      </div>
+
+      <!-- Credit Score -->
+      <p class="text-sm">Credit Score: <span class="text-yellow-400 font-semibold">92</span></p>
+
+      <!-- Invitation Code -->
+      <div class="flex justify-center items-center gap-2 text-sm">
+        <span class="text-gray-300">Invite:</span>
+        <span id="invite-code" class="bg-gray-800 px-3 py-1 rounded font-mono">INV12345</span>
+        <button onclick="copyText('invite-code')" title="Copy Invite Code" class="copy-btn">📎</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Settings Options -->
+  <section class="max-w-md mx-auto px-6 mt-6 space-y-4">
+    <!-- System Message -->
+    <a href="system.html" class="block glass p-4 rounded-xl hover:bg-gray-800 transition cursor-pointer">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <svg class="w-6 h-6 text-blue-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path d="M7 8h10M7 12h6M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+          </svg>
+          <span class="text-sm font-medium">System Message</span>
+        </div>
+        <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+        </svg>
+      </div>
+    </a>
+
+    <!-- Password Setting -->
+    <a href="password.html" class="block glass p-4 rounded-xl hover:bg-gray-800 transition cursor-pointer">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <svg class="w-6 h-6 text-yellow-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zM16 7a4 4 0 00-8 0v4h8V7z"/>
+          </svg>
+          <span class="text-sm font-medium">Password Setting</span>
+        </div>
+        <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+        </svg>
+      </div>
+    </a>
+
+    <!-- Sign Out -->
+    <a href="logout.html" class="block glass p-4 rounded-xl hover:bg-red-900 transition cursor-pointer">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <svg class="w-6 h-6 text-red-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h6a2 2 0 012 2v1"/>
+          </svg>
+          <span class="text-sm font-medium">Sign Out</span>
+        </div>
+        <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+        </svg>
+      </div>
+    </a>
+  </section>
+
+  <script>
+    function previewImage(event) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        document.getElementById('preview-img').src = reader.result;
+      };
+      reader.readAsDataURL(event.target.files[0]);
+    }
+
+    // Set Random ID
+    document.getElementById("user-id").innerText = "#" + Math.floor(10000 + Math.random() * 90000);
+
+    // Copy function for ID & Invite
+    function copyText(id) {
+      const text = document.getElementById(id).innerText;
+      navigator.clipboard.writeText(text).then(() => {
+        alert(`${id === "user-id" ? "ID" : "Invitation code"} copied!`);
+      });
+    }
+  </script>
+    <!-- Bottom Navigation Bar with Glass Effect -->
+  <nav class="fixed bottom-0 left-0 right-0 glass text-white z-50 border-t border-gray-700">
+    <div class="flex justify-around items-center text-center text-xs py-3">
+      <a href="home.html" class="flex flex-col items-center hover:text-green-400">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mb-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/>
+        </svg>
+        <span>Home</span>
+      </a>
+
+      <a href="profile.html" class="flex flex-col items-center hover:text-green-400">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mb-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A9 9 0 0112 3v0a9 9 0 016.879 14.804M15 21h.01"/>
+        </svg>
+        <span>Profile</span>
+      </a>
+
+      <a href="trade.html" class="flex flex-col items-center hover:text-green-400">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mb-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-6h6v6h5V9H4v8h5z"/>
+        </svg>
+        <span>Trading</span>
+      </a>
+
+      <a href="record.html" class="flex flex-col items-center hover:text-green-400">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mb-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/>
+        </svg>
+        <span>Record</span>
+      </a>
+
+      <a href="wallet.html" class="flex flex-col items-center text-green-400">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mb-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a4 4 0 00-8 0v2H5v11h14V9h-2z"/>
+        </svg>
+        <span>Wallet</span>
+      </a>
+    </div>
+  </nav>
+</body>
+</html>
