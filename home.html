@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Crypto Mobile Dashboard</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gradient-to-br from-indigo-900 via-purple-900 to-black text-white min-h-screen pb-20">
+
+<!-- Hero Section with Professional Trading Image -->
+<section class="text-center p-6">
+  <!-- 📸 Realistic Trading Image -->
+  <img 
+    src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&w=1200&q=80" 
+    alt="Crypto Analysis" 
+    class="rounded-xl shadow-xl mx-auto mb-4 w-full max-w-md"
+  />
+
+  <!-- 🧾 Title -->
+  <h1 class="text-2xl font-bold text-green-400 mt-2">Real-Time Crypto & Trading Insight</h1>
+  <p class="text-gray-300 mt-1 text-sm">
+    Stay ahead with live prices and trading tools designed for serious investors.
+  </p>
+</section>
+
+  <!-- Live Price List -->
+  <section class="max-w-3xl mx-auto px-4">
+    <div class="bg-gray-900 rounded-xl shadow-lg overflow-y-auto max-h-[400px] border border-gray-700">
+      <ul id="crypto-list" class="divide-y divide-gray-800">
+        <!-- Real-time coin prices will load here -->
+      </ul>
+    </div>
+  </section>
+
+  <!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 left-0 right-0 bg-gray-900 border-t border-gray-800 text-white shadow-inner z-50">
+  <div class="flex justify-around items-center text-center text-xs py-3">
+    <button class="flex flex-col items-center text-green-400">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mb-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/>
+      </svg>
+      <span>Home</span>
+    </button>
+
+    <button class="flex flex-col items-center hover:text-green-400">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mb-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A9 9 0 0112 3v0a9 9 0 016.879 14.804M15 21h.01"/>
+      </svg>
+      <span>Profile</span>
+    </button>
+
+    <button class="flex flex-col items-center hover:text-green-400">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mb-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-6h6v6h5V9H4v8h5z"/>
+      </svg>
+      <span>Trading</span>
+    </button>
+
+    <button class="flex flex-col items-center hover:text-green-400">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mb-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/>
+      </svg>
+      <span>Record</span>
+    </button>
+
+    <button class="flex flex-col items-center hover:text-green-400">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mb-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a4 4 0 00-8 0v2H5v11h14V9h-2z"/>
+      </svg>
+      <span>Wallet</span>
+    </button>
+  </div>
+</nav>
+
+  <!-- JS for Real-Time Prices -->
+  <script>
+    const coinList = [
+      { id: "bitcoin", name: "BTC/USDT" },
+      { id: "ethereum", name: "ETH/USDT" },
+      { id: "solana", name: "SOL/USDT" },
+      { id: "binancecoin", name: "BNB/USDT" },
+      { id: "ripple", name: "XRP/USDT" },
+      { id: "cardano", name: "ADA/USDT" },
+      { id: "dogecoin", name: "DOGE/USDT" },
+      { id: "polkadot", name: "DOT/USDT" },
+      { id: "litecoin", name: "LTC/USDT" },
+      { id: "avalanche-2", name: "AVAX/USDT" },
+      { id: "chainlink", name: "LINK/USDT" },
+      { id: "bitcoin", name: "BTC/USD", isDuplicate: true }
+    ];
+
+    async function loadPrices() {
+      try {
+        const ids = [...new Set(coinList.map(coin => coin.id))].join(",");
+        const url = `https://api.coingecko.com/api/v3/simple/price?ids=${ids}&vs_currencies=usd&include_24hr_change=true`;
+
+        const res = await fetch(url);
+        const data = await res.json();
+
+        const container = document.getElementById("crypto-list");
+        container.innerHTML = "";
+
+        coinList.forEach(coin => {
+          const price = data[coin.id]?.usd?.toLocaleString() || "N/A";
+          const change = data[coin.id]?.usd_24h_change?.toFixed(2) || "0.00";
+          const isUp = parseFloat(change) >= 0;
+          const changeColor = isUp ? "text-green-400" : "text-red-400";
+          const changeSymbol = isUp ? "▲" : "▼";
+
+          container.innerHTML += `
+            <li class="p-4 flex justify-between items-center hover:bg-gray-800 transition">
+              <span class="font-medium">${coin.name}</span>
+              <div class="text-right">
+                <div class="text-lg font-semibold">$${price}</div>
+                <div class="text-sm ${changeColor}">${changeSymbol} ${change}%</div>
+              </div>
+            </li>
+          `;
+        });
+
+      } catch (error) {
+        console.error("Price error:", error);
+        document.getElementById("crypto-list").innerHTML = `<li class="p-4 text-red-400">Failed to load prices...</li>`;
+      }
+    }
+
+    loadPrices();
+    setInterval(loadPrices, 60000);
+  </script>
+
+</body>
+</html>
