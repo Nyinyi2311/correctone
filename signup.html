@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Crypto Sign Up</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #1f1c2c, #928dab);
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+    }
+
+    .signup-box {
+      background: rgba(0, 0, 0, 0.75);
+      padding: 40px;
+      border-radius: 16px;
+      box-shadow: 0 0 25px rgba(255, 0, 255, 0.3);
+      width: 340px;
+      text-align: center;
+      position: relative;
+    }
+
+    .signup-box h2 {
+      margin-bottom: 20px;
+      color: #ff00ff;
+    }
+
+    .signup-box input {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border: none;
+      border-radius: 8px;
+      background: #2d2d44;
+      color: #fff;
+      font-size: 14px;
+    }
+
+    .signup-box input::placeholder {
+      color: #ccc;
+    }
+
+    .signup-box button {
+      background: #ff00ff;
+      color: #000;
+      padding: 12px;
+      width: 100%;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      margin-top: 10px;
+      transition: background 0.3s ease;
+    }
+
+    .signup-box button:hover {
+      background: #cc00cc;
+    }
+
+    .signin-link {
+      margin-top: 16px;
+      font-size: 14px;
+    }
+
+    .signin-link a {
+      color: #ff00ff;
+      text-decoration: none;
+    }
+
+    .signin-link a:hover {
+      text-decoration: underline;
+    }
+
+    .success-message {
+      display: none;
+      position: absolute;
+      top: -50px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #00ff99;
+      color: #000;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-weight: bold;
+      box-shadow: 0 0 10px rgba(0, 255, 150, 0.6);
+    }
+  </style>
+</head>
+<body>
+  <div class="signup-box">
+    <div class="success-message" id="successMsg">✔️ Registration Successful!</div>
+    <h2>Create Your Trading Account</h2>
+    <input type="text" placeholder="Username" id="username" required />
+    <input type="password" placeholder="Password" id="password" required />
+    <input type="password" placeholder="Confirm Password" id="confirmPassword" required />
+    <input type="text" placeholder="Invitation Code" id="inviteCode" required />
+    <button onclick="register()">Sign Up</button>
+    <div class="signin-link">
+      Already have an account? <a href="signin.html">Sign In</a>
+    </div>
+  </div>
+
+  <script>
+    function register() {
+      const username = document.getElementById("username").value.trim();
+      const password = document.getElementById("password").value.trim();
+      const confirmPassword = document.getElementById("confirmPassword").value.trim();
+      const inviteCode = document.getElementById("inviteCode").value.trim();
+      const successMsg = document.getElementById("successMsg");
+
+      if (!username || !password || !confirmPassword || !inviteCode) {
+        alert("Please fill in all fields!");
+        return;
+      }
+
+      if (password !== confirmPassword) {
+        alert("Passwords do not match!");
+        return;
+      }
+
+      // Show success message
+      successMsg.style.display = "block";
+
+      // Redirect to Login after 2 seconds
+      setTimeout(() => {
+        window.location.href = "https://nyinyi2311.github.io/login/";
+      }, 2000);
+    }
+  </script>
+</body>
+</html>
