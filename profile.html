@@ -50,27 +50,22 @@
 
   <!-- Profile Section -->
   <section class="max-w-md mx-auto p-6 text-center z-10 relative">
-    <!-- Profile Picture Upload -->
     <label for="profile-pic" class="block w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden border-4 border-green-400 cursor-pointer">
       <img id="preview-img" src="https://via.placeholder.com/150" alt="Profile" class="w-full h-full object-cover" />
       <input type="file" id="profile-pic" accept="image/*" onchange="previewImage(event)">
     </label>
 
-    <!-- User Info -->
     <div class="glass p-4 rounded-xl space-y-3">
       <h2 class="text-xl font-bold">Username123</h2>
 
-      <!-- Profile ID -->
       <div class="flex justify-center items-center gap-2 text-sm">
         <span class="text-gray-300">ID:</span>
         <span id="user-id" class="text-green-400 font-mono">#00000</span>
         <button onclick="copyText('user-id')" title="Copy ID" class="copy-btn">📎</button>
       </div>
 
-      <!-- Credit Score -->
       <p class="text-sm">Credit Score: <span class="text-yellow-400 font-semibold">92</span></p>
 
-      <!-- Invitation Code -->
       <div class="flex justify-center items-center gap-2 text-sm">
         <span class="text-gray-300">Invite:</span>
         <span id="invite-code" class="bg-gray-800 px-3 py-1 rounded font-mono">INV12345</span>
@@ -81,8 +76,9 @@
 
   <!-- Settings Options -->
   <section class="max-w-md mx-auto px-6 mt-6 space-y-4">
-    <!-- System Message -->
-    <a href="system.html" class="block glass p-4 rounded-xl hover:bg-gray-800 transition cursor-pointer">
+
+    <!-- ✅ System Message Redirect -->
+    <a href="message.html" class="block glass p-4 rounded-xl hover:bg-gray-800 transition cursor-pointer">
       <div class="flex items-center justify-between">
         <div class="flex items-center gap-3">
           <svg class="w-6 h-6 text-blue-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
@@ -96,7 +92,7 @@
       </div>
     </a>
 
-    <!-- Password Setting -->
+    <!-- ✅ Password Setting Redirect -->
     <a href="password.html" class="block glass p-4 rounded-xl hover:bg-gray-800 transition cursor-pointer">
       <div class="flex items-center justify-between">
         <div class="flex items-center gap-3">
@@ -112,7 +108,7 @@
     </a>
 
     <!-- Sign Out -->
-    <a href="logout.html" class="block glass p-4 rounded-xl hover:bg-red-900 transition cursor-pointer">
+    <div onclick="signOut()" class="block glass p-4 rounded-xl hover:bg-red-900 transition cursor-pointer">
       <div class="flex items-center justify-between">
         <div class="flex items-center gap-3">
           <svg class="w-6 h-6 text-red-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
@@ -124,9 +120,10 @@
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
         </svg>
       </div>
-    </a>
+    </div>
   </section>
 
+  <!-- JS Functions -->
   <script>
     function previewImage(event) {
       const reader = new FileReader();
@@ -136,18 +133,21 @@
       reader.readAsDataURL(event.target.files[0]);
     }
 
-    // Set Random ID
     document.getElementById("user-id").innerText = "#" + Math.floor(10000 + Math.random() * 90000);
 
-    // Copy function for ID & Invite
     function copyText(id) {
       const text = document.getElementById(id).innerText;
       navigator.clipboard.writeText(text).then(() => {
-        alert(`${id === "user-id" ? "ID" : "Invitation code"} copied!`);
+        alert((id === "user-id" ? "ID" : "Invitation code") + " copied!");
       });
     }
+
+    function signOut() {
+      window.location.href = "index.html";
+    }
   </script>
-   <!-- Bottom Navigation Bar with Glass Effect -->
+
+  <!-- Bottom Navigation -->
   <nav class="fixed bottom-0 left-0 right-0 glass text-white z-50 border-t border-gray-700">
     <div class="flex justify-around items-center text-center text-xs py-3">
       <a href="home.html" class="flex flex-col items-center hover:text-green-400">
