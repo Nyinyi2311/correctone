@@ -6,7 +6,6 @@
   <title>Homepage</title>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
   <style>
-    /* Luxury Animated Gradient Background */
     body {
       background: linear-gradient(-45deg, #0f172a, #1e293b, #3b0764, #111827);
       background-size: 400% 400%;
@@ -17,8 +16,6 @@
       50% { background-position: 100% 50%; }
       100% { background-position: 0% 50%; }
     }
-
-    /* Star texture overlay */
     body::before {
       content: "";
       position: fixed;
@@ -27,8 +24,6 @@
       opacity: 0.05;
       z-index: 0;
     }
-
-    /* Glassmorphism style card */
     .glass {
       background-color: rgba(255, 255, 255, 0.05);
       backdrop-filter: blur(14px);
@@ -110,21 +105,18 @@
       { id: "polkadot", name: "DOT/USDT" },
       { id: "litecoin", name: "LTC/USDT" },
       { id: "avalanche-2", name: "AVAX/USDT" },
-      { id: "chainlink", name: "LINK/USDT" },
-      { id: "bitcoin", name: "BTC/USD" }
+      { id: "chainlink", name: "LINK/USDT" }
     ];
 
     function goToTrading(coinName) {
-      // Clean coinName to URL param style (remove / and $)
-      const paramCoin = coinName.replace("/", "").replace("$", "");
+      const paramCoin = encodeURIComponent(coinName.replace("/", ""));
       window.location.href = `trading.html?coin=${paramCoin}`;
     }
 
     async function loadPrices() {
       try {
-        const ids = [...new Set(coinList.map(coin => coin.id))].join(",");
-        const url = `https://api.coingecko.com/api/v3/simple/price?ids=${ids}&vs_currencies=usd&include_24hr_change=true`;
-        const res = await fetch(url);
+        const ids = coinList.map(coin => coin.id).join(",");
+        const res = await fetch(`https://api.coingecko.com/api/v3/simple/price?ids=${ids}&vs_currencies=usd&include_24hr_change=true`);
         const data = await res.json();
 
         const container = document.getElementById("crypto-list");
@@ -137,8 +129,6 @@
           const changeColor = isUp ? "text-green-400" : "text-red-400";
           const changeSymbol = isUp ? "▲" : "▼";
 
-          const coinValue = coin.name.replace("/", "").replace("$", "");
-
           container.innerHTML += `
             <li onclick="goToTrading('${coin.name}')" class="p-4 flex justify-between items-center hover:bg-gray-800 transition cursor-pointer">
               <span class="font-medium">${coin.name}</span>
@@ -150,9 +140,9 @@
           `;
         });
 
-      } catch (error) {
-        console.error("Price error:", error);
-        document.getElementById("crypto-list").innerHTML = `<li class="p-4 text-red-400">Failed to load prices...</li>`;
+      } catch (err) {
+        console.error("Error loading prices:", err);
+        document.getElementById("crypto-list").innerHTML = `<li class="p-4 text-red-400">Failed to load prices.</li>`;
       }
     }
 
