@@ -6,7 +6,6 @@
   <title>Wallet</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    /* Luxury Animated Gradient Background */
     body {
       background: linear-gradient(-45deg, #0f172a, #1e293b, #3b0764, #111827);
       background-size: 400% 400%;
@@ -17,8 +16,6 @@
       50% { background-position: 100% 50%; }
       100% { background-position: 0% 50%; }
     }
-
-    /* Star texture overlay */
     body::before {
       content: "";
       position: fixed;
@@ -27,8 +24,6 @@
       opacity: 0.05;
       z-index: 0;
     }
-
-    /* Glassmorphism style card */
     .glass {
       background-color: rgba(255, 255, 255, 0.05);
       backdrop-filter: blur(14px);
@@ -37,11 +32,9 @@
     }
   </style>
 </head>
-<body class="text-white min-h-screen pb-20 relative z-10">
-</head>
-<body class="text-white min-h-screen flex flex-col justify-between">
+<body class="text-white min-h-screen flex flex-col justify-between relative z-10 pb-20">
 
-  <!-- Top Wallet Section -->
+  <!-- Wallet Section -->
   <div class="text-center pt-12">
     <h1 class="text-2xl font-bold mb-4">Wallet Balance</h1>
     <p class="text-4xl text-green-400 font-semibold mb-8">$ 8,925.00</p>
@@ -54,7 +47,7 @@
     </div>
   </div>
 
-  <!-- Bottom Navigation Bar with Glass Effect -->
+  <!-- Bottom Navigation -->
   <nav class="fixed bottom-0 left-0 right-0 glass text-white z-50 border-t border-gray-700">
     <div class="flex justify-around items-center text-center text-xs py-3">
       <a href="home.html" class="flex flex-col items-center hover:text-green-400">
@@ -71,7 +64,7 @@
         <span>Profile</span>
       </a>
 
-      <a href="trade.html" class="flex flex-col items-center hover:text-green-400">
+      <a href="trading.html" class="flex flex-col items-center hover:text-green-400">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mb-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-6h6v6h5V9H4v8h5z"/>
         </svg>
