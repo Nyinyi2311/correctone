@@ -95,15 +95,96 @@
       <button id="closeLong" class="text-white text-xl px-2">&times;</button>
     </div>
 
-    <!-- Balance & Coin Info -->
-    <div class="flex justify-between items-center mb-4">
-      <div class="text-sm text-green-400 font-semibold">
-        Balance: <span id="userBalance">1200</span> USDT
-      </div>
-      <div class="text-sm text-yellow-400">
-        Price: <span id="coinPrice">$29,837.25</span>
-      </div>
-    </div>
+<!-- Balance -->
+<div class="flex justify-between items-center mb-4">
+  <div class="text-sm text-green-400 font-semibold">
+    Balance: <span id="userBalance">$ 0.00</span> USDT
+  </div>
+  <div class="text-sm text-yellow-400">
+    Price: <span id="coinPrice">$0.00</span>
+  </div>
+</div>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    // Set balance from wallet.html storage
+    const balance = localStorage.getItem("balance") || "0";
+    document.getElementById("userBalance").textContent = `$ ${parseFloat(balance).toLocaleString()}`;
+  });
+
+  function updatePrice(coin) {
+    const mockPrices = {
+      'BTC/USDT': 29837.25,
+      'ETH/USDT': 1873.64,
+      'SOL/USDT': 42.15,
+      'BNB/USDT': 237.88,
+      'XRP/USDT': 0.63,
+      'ADA/USDT': 0.27,
+      'DOGE/USDT': 0.075,
+      'DOT/USDT': 6.4,
+      'LTC/USDT': 92.3,
+      'AVAX/USDT': 11.65,
+      'LINK/USDT': 7.34,
+      'BTC/USD': 29842.11
+    };
+    const price = mockPrices[coin] || 0;
+    document.getElementById('coinPrice').innerText = `$${price}`;
+  }
+
+  function selectCoin(coin) {
+    document.getElementById('selectedCoin').innerText = coin;
+    document.getElementById('dropdownMenu').classList.add('hidden');
+    document.getElementById('selectedCoin').classList.remove('text-green-400');
+
+    const modalCoinName = document.getElementById('modalCoinName');
+    if (modalCoinName) modalCoinName.textContent = coin;
+
+    updatePrice(coin);
+  }
+
+  document.getElementById('submitTrade').addEventListener('click', () => {
+    const selectedCoin = document.getElementById('selectedCoin').innerText;
+    const amountInput = document.querySelector('input[type="number"]');
+    const selectedAmount = amountInput.value || '0';
+    const selectedTime = document.querySelector('.time-btn.bg-green-500')?.innerText.replace('s', '') || '60';
+    const priceText = document.getElementById('coinPrice').innerText.replace('$', '');
+    const price = parseFloat(priceText) || 0;
+
+    const tradeAmount = parseFloat(selectedAmount);
+    let currentBalance = parseFloat(localStorage.getItem("balance") || "0");
+
+    if (tradeAmount <= 0 || tradeAmount > currentBalance) {
+      alert("Invalid amount or insufficient balance.");
+      return;
+    }
+
+    // Deduct and update balance
+    const newBalance = currentBalance - tradeAmount;
+    localStorage.setItem("balance", newBalance.toFixed(2));
+    document.getElementById("userBalance").textContent = `$ ${newBalance.toLocaleString()}`;
+
+    // Fill countdown modal content
+    document.getElementById('cdCoin').innerText = selectedCoin;
+    document.getElementById('cdAmount').innerText = tradeAmount.toFixed(2);
+    document.getElementById('cdTime').innerText = selectedTime;
+    document.getElementById('cdPrice').innerText = `$${price.toFixed(2)}`;
+    document.getElementById('cdCountdown').innerText = selectedTime;
+
+    // Show countdown modal
+    const countdownModal = document.getElementById('countdownModal');
+    countdownModal.classList.remove('hidden');
+    modal.classList.add('hidden');
+
+    let timeLeft = parseInt(selectedTime);
+    const interval = setInterval(() => {
+      timeLeft--;
+      document.getElementById('cdCountdown').innerText = timeLeft;
+      if (timeLeft <= 0) {
+        clearInterval(interval);
+        document.getElementById('cdCountdown').innerText = '✔️ Done!';
+      }
+    }, 1000);
+  });
+</script>
 
     <!-- Time Options -->
     <div class="flex gap-2 mb-4 overflow-x-auto" id="timeOptions">
