@@ -32,7 +32,7 @@
     }
   </style>
 </head>
-<body class="text-white min-h-screen flex flex-col justify-between relative z-10 pb-20">
+<body class="text-white min-h-screen flex flex-col justify-between relative z-10 pb-24">
 
 <!-- Wallet Section -->
 <div class="pt-12 px-6">
@@ -46,28 +46,19 @@
     </div>
     <p id="walletBalance" class="text-5xl font-bold text-green-400 drop-shadow-[0_0_10px_rgba(34,197,94,0.6)] mb-6 transition duration-300">$ 0.00</p>
   </div>
-</div>
 
-<script>
-  const walletBalance = 8925.00;
-  localStorage.setItem("balance", walletBalance.toFixed(2));
-</script>
-
-  <!-- Deposit & Withdraw grouped in glass box -->
-  <div class="glass rounded-2xl p-4 mb-6 shadow-lg">
+  <!-- Deposit & Withdraw -->
+  <div class="glass rounded-2xl p-4 my-6 shadow-lg">
     <div class="grid grid-cols-2 gap-4">
-      <!-- Deposit -->
-      <a href="deposit.html" class="bg-green-600 hover:bg-green-500 text-white py-3 rounded-xl shadow text-lg flex items-center justify-center gap-2">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <a href="deposit.html" class="bg-green-600 hover:bg-green-500 text-white py-3 rounded-xl shadow text-base flex items-center justify-center gap-2">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
             d="M12 3v12m0 0l-4-4m4 4l4-4M4 17h16a2 2 0 002-2v-4a2 2 0 00-2-2H4a2 2 0 00-2 2v4a2 2 0 002 2z" />
         </svg>
         Deposit
       </a>
-
-      <!-- Withdraw -->
-      <a href="withdraw.html" class="bg-red-600 hover:bg-red-500 text-white py-3 rounded-xl shadow text-lg flex items-center justify-center gap-2">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <a href="withdraw.html" class="bg-red-600 hover:bg-red-500 text-white py-3 rounded-xl shadow text-base flex items-center justify-center gap-2">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
             d="M12 21V9m0 0l-4 4m4-4l4 4M4 7h16a2 2 0 012 2v4a2 2 0 01-2 2H4a2 2 0 01-2-2V9a2 2 0 012-2z" />
         </svg>
@@ -77,16 +68,16 @@
   </div>
 
   <!-- Financial History -->
-  <a href="history.html" class="block bg-blue-800 bg-opacity-70 hover:bg-opacity-90 text-white py-3 rounded-xl shadow text-lg text-center backdrop-blur flex items-center justify-center gap-2 mb-4">
-    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+  <a href="history.html" class="block glass text-white py-3 rounded-xl shadow text-base text-center flex items-center justify-center gap-2 mb-4">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h11M9 21V3M17 16l4-4m0 0l-4-4m4 4H9"/>
     </svg>
     Financial History
   </a>
 
   <!-- About Us -->
-  <a href="about.html" class="block bg-blue-800 bg-opacity-70 hover:bg-opacity-90 text-white py-3 rounded-xl shadow text-lg text-center backdrop-blur flex items-center justify-center gap-2">
-    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+  <a href="about.html" class="block glass text-white py-3 rounded-xl shadow text-base text-center flex items-center justify-center gap-2">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M12 20.5A8.5 8.5 0 103.5 12 8.5 8.5 0 0012 20.5z"/>
     </svg>
     About Us
@@ -132,6 +123,13 @@
     </a>
   </div>
 </nav>
+
+<script>
+  // Set wallet balance and store in localStorage
+  const walletBalance = 8925.00;
+  document.getElementById('walletBalance').textContent = `$ ${walletBalance.toFixed(2)}`;
+  localStorage.setItem("balance", walletBalance.toFixed(2));
+</script>
 
 </body>
 </html>
