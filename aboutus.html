@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>About Us</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      margin: 0;
+      padding-bottom: 5rem;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(-45deg, #0f172a, #1e293b, #3b0764, #111827);
+      background-size: 400% 400%;
+      animation: gradientBG 15s ease infinite;
+      color: white;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    @keyframes gradientBG {
+      0% {background-position: 0% 50%;}
+      50% {background-position: 100% 50%;}
+      100% {background-position: 0% 50%;}
+    }
+    .glass {
+      background-color: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(14px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 1rem;
+      padding: 2rem;
+      max-width: 800px;
+      width: 90%;
+      margin-top: 6rem;
+    }
+    .back-btn {
+      position: absolute;
+      top: 1rem;
+      left: 1rem;
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.15);
+      padding: 0.5rem 1rem;
+      border-radius: 0.5rem;
+      color: white;
+      font-weight: 600;
+      transition: background-color 0.3s;
+    }
+    .back-btn:hover {
+      background: rgba(255,255,255,0.2);
+    }
+  </style>
+</head>
+<body>
+
+  <button class="back-btn" onclick="window.location.href='wallet.html'">← Back</button>
+
+  <div class="glass text-center">
+    <h1 class="text-2xl md:text-3xl font-bold mb-4">About us</h1>
+    <p class="text-sm md:text-base leading-relaxed text-white/90">
+      Welcome to our innovative crypto trading platform — where technology meets opportunity. 
+      We aim to provide a secure, fast, and intuitive environment for traders of all levels.
+      <br /><br />
+      Our mission is to empower users with real-time data, simple trade execution, and complete transparency. 
+      With advanced tools, global market access, and strong security, you can trade confidently 24/7.
+      <br /><br />
+      Whether you're a beginner or a seasoned investor, our platform is designed to help you grow and succeed in the ever-changing world of crypto.
+      <br /><br />
+      Thank you for choosing us.
+    </p>
+    <div class="mt-6 text-white/70 text-xs">
+      © 2025 CryptoTrade Inc. All rights reserved.
+    </div>
+  </div>
+
+</body>
+</html>
