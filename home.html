@@ -70,28 +70,24 @@
         </svg>
         <span>Home</span>
       </a>
-
       <a href="profile.html" class="flex flex-col items-center hover:text-green-400">
         <svg class="h-5 w-5 mb-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A9 9 0 0112 3v0a9 9 0 016.879 14.804M15 21h.01"/>
         </svg>
         <span>Profile</span>
       </a>
-
       <a href="trading.html" class="flex flex-col items-center hover:text-green-400">
         <svg class="h-5 w-5 mb-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-6h6v6h5V9H4v8h5z"/>
         </svg>
         <span>Trading</span>
       </a>
-
       <a href="record.html" class="flex flex-col items-center hover:text-green-400">
         <svg class="h-5 w-5 mb-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/>
         </svg>
         <span>Record</span>
       </a>
-
       <a href="wallet.html" class="flex flex-col items-center hover:text-green-400">
         <svg class="h-5 w-5 mb-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a4 4 0 00-8 0v2H5v11h14V9h-2z"/>
@@ -118,6 +114,12 @@
       { id: "bitcoin", name: "BTC/USD" }
     ];
 
+    function goToTrading(coinName) {
+      // Clean coinName to URL param style (remove / and $)
+      const paramCoin = coinName.replace("/", "").replace("$", "");
+      window.location.href = `trading.html?coin=${paramCoin}`;
+    }
+
     async function loadPrices() {
       try {
         const ids = [...new Set(coinList.map(coin => coin.id))].join(",");
@@ -138,7 +140,7 @@
           const coinValue = coin.name.replace("/", "").replace("$", "");
 
           container.innerHTML += `
-            <li onclick="goToTrading('${coinValue}')" class="p-4 flex justify-between items-center hover:bg-gray-800 transition cursor-pointer">
+            <li onclick="goToTrading('${coin.name}')" class="p-4 flex justify-between items-center hover:bg-gray-800 transition cursor-pointer">
               <span class="font-medium">${coin.name}</span>
               <div class="text-right">
                 <div class="text-lg font-semibold">$${price}</div>
@@ -157,8 +159,5 @@
     loadPrices();
     setInterval(loadPrices, 60000);
   </script>
-</body>
-</html>
-
 </body>
 </html>
