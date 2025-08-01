@@ -35,9 +35,25 @@
 <body class="text-white min-h-screen flex flex-col justify-between relative z-10 pb-20">
 
 <!-- Wallet Section -->
-<div class="text-center pt-12 px-6">
-  <h1 class="text-2xl font-bold mb-4">Wallet Balance</h1>
-  <p class="text-4xl text-green-400 font-semibold mb-8">$ 8,925.00</p>
+<div class="pt-12 px-6">
+  <div class="bg-white/5 backdrop-blur-md border border-white/10 rounded-3xl p-6 shadow-lg shadow-purple-900/20 relative text-center">
+    <div class="flex items-center justify-center gap-2 mb-2 text-xl font-semibold text-gray-300">
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+          d="M17 9V7a4 4 0 00-8 0v2H5v11h14V9h-2z" />
+      </svg>
+      <span>Balance</span>
+    </div>
+    <p id="walletBalance" class="text-5xl font-bold text-green-400 drop-shadow-[0_0_10px_rgba(34,197,94,0.6)] mb-6 transition duration-300">$ 0.00</p>
+  </div>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const balance = localStorage.getItem("balance") || "8925.00";
+    document.getElementById("walletBalance").textContent = `$ ${parseFloat(balance).toLocaleString()}`;
+  });
+</script>
 
   <!-- Deposit & Withdraw grouped in glass box -->
   <div class="glass rounded-2xl p-4 mb-6 shadow-lg">
