@@ -49,10 +49,8 @@
 </div>
 
 <script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const balance = localStorage.getItem("balance") || "8925.00";
-    document.getElementById("walletBalance").textContent = `$ ${parseFloat(balance).toLocaleString()}`;
-  });
+  const walletBalance = 8925.00;
+  localStorage.setItem("balance", walletBalance.toFixed(2));
 </script>
 
   <!-- Deposit & Withdraw grouped in glass box -->
