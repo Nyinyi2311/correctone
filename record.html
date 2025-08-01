@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Trade Records</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(-45deg, #0f172a, #1e293b, #3b0764, #111827);
+      background-size: 400% 400%;
+      animation: gradientBG 15s ease infinite;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    @keyframes gradientBG {
+      0% {background-position: 0% 50%;}
+      50% {background-position: 100% 50%;}
+      100% {background-position: 0% 50%;}
+    }
+
+    .glass {
+      backdrop-filter: blur(12px);
+      background-color: rgba(255, 255, 255, 0.05);
+    }
+
+    .record-card {
+      border-radius: 1rem;
+      padding: 1rem;
+      background-color: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: white;
+    }
+  </style>
+</head>
+<body class="text-white pb-20">
+
+  <div class="p-4">
+    <h1 class="text-2xl font-bold mb-4">📄 Trade History</h1>
+
+    <div id="tradeHistory" class="space-y-4">
+      <!-- Sample trade history (Replace with dynamic entries if needed) -->
+      <div class="record-card">
+        <div class="flex justify-between">
+          <span class="font-semibold">BTC/USDT</span>
+          <span class="text-green-400 font-semibold">+12.00 USDT ✅</span>
+        </div>
+        <div class="text-sm mt-1">
+          <p>Type: Long</p>
+          <p>Amount: 100 USDT</p>
+          <p>Time: 90s</p>
+          <p>Date: 2025-08-01 15:30</p>
+        </div>
+      </div>
+
+      <div class="record-card">
+        <div class="flex justify-between">
+          <span class="font-semibold">ETH/USDT</span>
+          <span class="text-red-400 font-semibold">−8.00 USDT ❌</span>
+        </div>
+        <div class="text-sm mt-1">
+          <p>Type: Short</p>
+          <p>Amount: 50 USDT</p>
+          <p>Time: 60s</p>
+          <p>Date: 2025-08-01 14:50</p>
+        </div>
+      </div>
+
+      <!-- More trade cards can be appended dynamically -->
+    </div>
+  </div>
+
+  <!-- Bottom Navigation Bar -->
+  <nav class="fixed bottom-0 left-0 right-0 glass text-white z-50 border-t border-gray-700">
+    <div class="flex justify-around items-center text-center text-xs py-3">
+      <a href="home.html" class="flex flex-col items-center hover:text-green-400">
+        <svg class="h-5 w-5 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/>
+        </svg>
+        <span>Home</span>
+      </a>
+
+      <a href="profile.html" class="flex flex-col items-center hover:text-green-400">
+        <svg class="h-5 w-5 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M5.121 17.804A9 9 0 0112 3v0a9 9 0 016.879 14.804M15 21h.01"/>
+        </svg>
+        <span>Profile</span>
+      </a>
+
+      <a href="trading.html" class="flex flex-col items-center hover:text-green-400">
+        <svg class="h-5 w-5 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M9 17v-6h6v6h5V9H4v8h5z"/>
+        </svg>
+        <span>Trading</span>
+      </a>
+
+      <a href="record.html" class="flex flex-col items-center text-green-400">
+        <svg class="h-5 w-5 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/>
+        </svg>
+        <span>Record</span>
+      </a>
+
+      <a href="wallet.html" class="flex flex-col items-center hover:text-green-400">
+        <svg class="h-5 w-5 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M17 9V7a4 4 0 00-8 0v2H5v11h14V9h-2z"/>
+        </svg>
+        <span>Wallet</span>
+      </a>
+    </div>
+  </nav>
+</body>
+</html>
