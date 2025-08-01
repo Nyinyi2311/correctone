@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Messages</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      margin: 0; padding-bottom: 5rem;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(-45deg, #0f172a, #1e293b, #3b0764, #111827);
+      background-size: 400% 400%;
+      animation: gradientBG 15s ease infinite;
+      color: white;
+      min-height: 100vh;
+      display: flex; flex-direction: column;
+    }
+    @keyframes gradientBG {
+      0% {background-position: 0% 50%;}
+      50% {background-position: 100% 50%;}
+      100% {background-position: 0% 50%;}
+    }
+    .glass {
+      background-color: rgba(255,255,255,0.05);
+      backdrop-filter: blur(12px);
+      border-radius: 1rem;
+      border: 1px solid rgba(255,255,255,0.15);
+      padding: 1rem;
+      margin-bottom: 1rem;
+    }
+    button.back-btn {
+      background: rgba(255,255,255,0.1);
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 0.5rem;
+      color: white;
+      cursor: pointer;
+      margin-bottom: 1rem;
+      font-weight: 600;
+      transition: background-color 0.3s;
+    }
+    button.back-btn:hover {
+      background: rgba(255,255,255,0.2);
+    }
+    .message-item {
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+      padding: 0.5rem;
+      border-radius: 0.5rem;
+    }
+    .message-item:hover {
+      background-color: rgba(255,255,255,0.1);
+    }
+    .header {
+      padding: 1rem;
+      font-size: 1.5rem;
+      font-weight: bold;
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="messageListView" class="p-4 flex-grow">
+    <button class="back-btn" id="backToProfileBtn">Back to Profile</button>
+    <h1 class="header">Messages</h1>
+    <div id="messagesContainer">
+      <!-- Messages will load here -->
+    </div>
+  </div>
+
+  <div id="messageDetailView" class="p-4 flex-grow hidden">
+    <button class="back-btn" id="backToListBtn">Back to Messages</button>
+    <h1 class="header" id="detailTitle"></h1>
+    <p id="detailContent" style="white-space: pre-wrap;"></p>
+  </div>
+
+  <script>
+    // Mock backend messages data
+    const messages = [
+      {
+        id: 1,
+        title: "Welcome to Our Service!",
+        content: "Hello User,\n\nThank you for joining our platform. We're excited to have you here.\n\nBest regards,\nTeam"
+      },
+      {
+        id: 2,
+        title: "Update on your account",
+        content: "Dear User,\n\nYour account settings were updated successfully.\nIf you didn't do this, please contact support immediately.\n\nThank you."
+      },
+      {
+        id: 3,
+        title: "Scheduled Maintenance",
+        content: "Hi,\n\nWe will be performing scheduled maintenance on August 5th from 1:00 AM to 3:00 AM UTC.\nDuring this time, some services may be unavailable.\n\nThanks for your understanding."
+      }
+    ];
+
+    const messageListView = document.getElementById("messageListView");
+    const messagesContainer = document.getElementById("messagesContainer");
+    const messageDetailView = document.getElementById("messageDetailView");
+    const detailTitle = document.getElementById("detailTitle");
+    const detailContent = document.getElementById("detailContent");
+    const backToProfileBtn = document.getElementById("backToProfileBtn");
+    const backToListBtn = document.getElementById("backToListBtn");
+
+    // Load messages into list view
+    function loadMessages() {
+      messagesContainer.innerHTML = "";
+      messages.forEach(msg => {
+        const div = document.createElement("div");
+        div.className = "glass message-item";
+        div.textContent = msg.title;
+        div.onclick = () => showDetail(msg.id);
+        messagesContainer.appendChild(div);
+      });
+    }
+
+    // Show message detail view
+    function showDetail(id) {
+      const msg = messages.find(m => m.id === id);
+      if (!msg) return;
+
+      detailTitle.textContent = msg.title;
+      detailContent.textContent = msg.content;
+
+      messageListView.classList.add("hidden");
+      messageDetailView.classList.remove("hidden");
+    }
+
+    // Back to message list view
+    backToListBtn.addEventListener("click", () => {
+      messageDetailView.classList.add("hidden");
+      messageListView.classList.remove("hidden");
+    });
+
+    // Back to profile page
+    backToProfileBtn.addEventListener("click", () => {
+      window.location.href = "profile.html";
+    });
+
+    // Initial load
+    loadMessages();
+  </script>
+
+</body>
+</html>
